@@ -26,6 +26,218 @@ st.set_page_config(
 
 
 # ============================================================
+# MULTILINGUAL / I18N SUPPORT
+# ============================================================
+
+# The internal crop/soil/disease keys remain in English so the
+# ML model and business logic are unchanged. Only user-facing
+# strings are translated.
+LANGUAGES = {
+    "English": "en",
+    "தமிழ்": "ta",
+    "हिन्दी": "hi",
+    "తెలుగు": "te",
+    "ಕನ್ನಡ": "kn",
+    "മലയാളം": "ml",
+}
+
+TRANSLATIONS = {
+    "en": {
+        "app_subtitle": "AI-powered agriculture assistant",
+        "navigation": "Navigation",
+        "dashboard": "🏠 Dashboard",
+        "crop_setup": "🌾 Crop Setup",
+        "disease_scanner": "🦠 Disease Scanner",
+        "weather": "🌦️ Weather",
+        "smart_irrigation": "💧 Smart Irrigation",
+        "recommendations": "🤖 Crop Recommendations",
+        "market": "💰 Market Information",
+        "smart_agriculture": "Smart Agriculture Assistant",
+        "dashboard_desc": "Use AI-assisted crop disease detection, weather information, irrigation guidance and crop recommendations.",
+        "crop": "Crop",
+        "soil": "Soil",
+        "rain_risk": "Rain Risk",
+        "growth_stage": t("growth_stage_label"),
+        "not_set": "Not set",
+        "features": "🚀 AgriBridge Features",
+        "disease_feature": t("disease_feature"),
+        "weather_feature": t("weather_feature"),
+        "irrigation_feature": t("irrigation_feature"),
+        "enter_farm_info": t("enter_farm_info"),
+        "farm_area": t("farm_area"),
+        "soil_type": t("soil_type"),
+        "growth_stage_label": t("growth_stage_label"),
+        "irrigation_method": t("irrigation_method"),
+        "save_crop": t("save_crop"),
+        "crop_saved": t("crop_saved"),
+        "upload_crop": t("upload_crop"),
+        "uploaded_crop": "Uploaded Crop Image",
+        "scan": t("scan"),
+        "analyzing": t("analyzing"),
+        "model_loaded": "AI model loaded successfully — {n} classes.",
+        "model_failed": t("model_failed"),
+        "ai_analysis": t("ai_analysis"),
+        "prediction": t("prediction"),
+        "confidence": t("confidence"),
+        "healthy": t("healthy"),
+        "disease_detected": t("disease_detected"),
+        "care": t("care"),
+        "prevention": t("prevention"),
+        "top_predictions": t("top_predictions"),
+        "coordinates": t("coordinates"),
+        "latitude": t("latitude"),
+        "longitude": t("longitude"),
+        "get_weather": t("get_weather"),
+        "loading_weather": t("loading_weather"),
+        "temperature": t("temperature"),
+        "humidity": t("humidity"),
+        "rain": t("rain"),
+        "wind": t("wind"),
+        "rain_risk_heading": t("rain_risk_heading"),
+        "high_rain": "🔴 High Rain Risk — {p}% maximum forecast probability",
+        "moderate_rain": "🟠 Moderate Rain Risk — {p}% maximum forecast probability",
+        "low_rain": "🟢 Low Rain Risk — {p}% maximum forecast probability",
+        "weather_advice": t("weather_advice"),
+        "forecast": t("forecast"),
+        "generate_irrigation": t("generate_irrigation"),
+        "irrigation_desc": t("irrigation_desc"),
+        "configure_crop": t("configure_crop"),
+        "rain_probability": t("rain_probability"),
+        "recommendation": t("recommendation"),
+        "advice": t("advice"),
+        "generate_recommendations": t("generate_recommendations"),
+        "recommendations_heading": t("recommendations_heading"),
+        "save_details_first": t("save_details_first"),
+        "generating_for": "Generating recommendations for **{crop}**",
+        "commodity": t("commodity"),
+        "state_optional": t("state_optional"),
+        "district_optional": t("district_optional"),
+        "get_market": t("get_market"),
+        "fetching_market": t("fetching_market"),
+        "market_found": t("market_found"),
+        "no_market": t("no_market"),
+        "footer": t("footer"),
+        "unable_weather": "Unable to load weather: {error}",
+        "prediction_failed": "Disease prediction failed: {error}",
+        "unable_market": "Unable to retrieve market information: {error}",
+        "language": "🌐 Language",
+        "select_language": "Choose your language",
+        "current_crop_info": "Crop: **{crop}** | Soil: **{soil}** | Growth: **{growth}** | Irrigation: **{irrigation}**",
+        "crop_image_help": "Supported formats: JPG, JPEG, PNG, WEBP",
+        "language_note": "Language changes apply immediately to the interface.",
+    },
+    "ta": {
+        "app_subtitle": "AI மூலம் இயக்கப்படும் வேளாண்மை உதவியாளர்",
+        "navigation": "வழிசெலுத்தல்",
+        "dashboard": "🏠 முகப்பு",
+        "crop_setup": "🌾 பயிர் அமைப்பு",
+        "disease_scanner": "🦠 நோய் கண்டறிதல்",
+        "weather": "🌦️ வானிலை",
+        "smart_irrigation": "💧 ஸ்மார்ட் பாசனம்",
+        "recommendations": "🤖 பயிர் பரிந்துரைகள்",
+        "market": "💰 சந்தை தகவல்",
+        "smart_agriculture": "ஸ்மார்ட் வேளாண்மை உதவியாளர்",
+        "dashboard_desc": "AI உதவியுடன் பயிர் நோய் கண்டறிதல், வானிலை தகவல், பாசன வழிகாட்டுதல் மற்றும் பயிர் பரிந்துரைகளைப் பயன்படுத்துங்கள்.",
+        "crop": "பயிர்", "soil": "மண்", "rain_risk": "மழை அபாயம்", "growth_stage": "வளர்ச்சி நிலை", "not_set": "அமைக்கப்படவில்லை",
+        "features": "🚀 AgriBridge அம்சங்கள்",
+        "disease_feature": "🦠 **நோய் கண்டறிதல்**\n\nபயிர் இலைப் படத்தைப் பதிவேற்றி, பயிற்சி பெற்ற AI மாதிரியைப் பயன்படுத்தி நோயை கண்டறியுங்கள்.",
+        "weather_feature": "🌦️ **வானிலை**\n\nதற்போதைய வானிலை, மழை வாய்ப்பு மற்றும் விவசாய வழிகாட்டுதலைப் பார்க்கவும்.",
+        "irrigation_feature": "💧 **ஸ்மார்ட் பாசனம்**\n\nமண், பயிர் வளர்ச்சி நிலை மற்றும் மழை வாய்ப்பைப் பயன்படுத்தி பாசன வழிகாட்டுதலை உருவாக்குங்கள்.",
+        "enter_farm_info": "உங்கள் பண்ணை மற்றும் பயிர் தகவல்களை உள்ளிடுங்கள்.",
+        "farm_area": "பண்ணை பரப்பளவு", "soil_type": "மண் வகை", "growth_stage_label": "வளர்ச்சி நிலை", "irrigation_method": "பாசன முறை",
+        "save_crop": "💾 பயிர் விவரங்களை சேமிக்கவும்", "crop_saved": "பயிர் விவரங்கள் வெற்றிகரமாக சேமிக்கப்பட்டன!",
+        "upload_crop": "📷 பயிர் படத்தைப் பதிவேற்றவும்", "uploaded_crop": "பதிவேற்றிய பயிர் படம்", "scan": "🤖 நோயைக் கண்டறியவும்",
+        "analyzing": "பயிர் படத்தை ஆய்வு செய்கிறது...", "model_loaded": "AI மாதிரி வெற்றிகரமாக ஏற்றப்பட்டது — {n} வகைகள்.",
+        "model_failed": "நோய் கண்டறிதல் மாதிரியை ஏற்ற முடியவில்லை.", "ai_analysis": "🤖 AI ஆய்வு", "prediction": "கணிப்பு", "confidence": "நம்பகத்தன்மை",
+        "healthy": "🌱 இந்தப் படம் ஆரோக்கியமானது என மாதிரி வகைப்படுத்தியுள்ளது.", "disease_detected": "⚠️ நோய் தொடர்பான வகை கண்டறியப்பட்டுள்ளது.",
+        "care": "🩺 பரிந்துரைக்கப்படும் பராமரிப்பு", "prevention": "🛡️ தடுப்பு", "top_predictions": "📊 முக்கிய கணிப்புகள்",
+        "coordinates": "உங்கள் பண்ணையின் ஆயத்தொலைவுகளை உள்ளிடுங்கள்.", "latitude": "அட்சரேகை", "longitude": "தீர்க்கரேகை",
+        "get_weather": "🌦️ வானிலையைப் பெறுக", "loading_weather": "நேரடி வானிலை ஏற்றப்படுகிறது...", "temperature": "🌡️ வெப்பநிலை",
+        "humidity": "💧 ஈரப்பதம்", "rain": "🌧️ மழை", "wind": "🌬️ காற்று", "rain_risk_heading": "🌧️ மழை அபாயம்",
+        "high_rain": "🔴 அதிக மழை அபாயம் — அதிகபட்ச முன்னறிவிப்பு வாய்ப்பு {p}%", "moderate_rain": "🟠 மிதமான மழை அபாயம் — {p}%",
+        "low_rain": "🟢 குறைந்த மழை அபாயம் — {p}%", "weather_advice": "🌱 விவசாய வானிலை ஆலோசனை", "forecast": "📅 3 நாள் முன்னறிவிப்பு",
+        "generate_irrigation": "💧 பாசன ஆலோசனையை உருவாக்கவும்", "irrigation_desc": "உங்கள் பயிர் தகவல் மற்றும் மழை வாய்ப்பைப் பயன்படுத்தி பாசன வழிகாட்டுதலை உருவாக்குங்கள்.",
+        "configure_crop": "முதலில் உங்கள் பயிரை அமைக்கவும்.", "rain_probability": "மழை வாய்ப்பு (%)", "recommendation": "பரிந்துரை", "advice": "📋 ஆலோசனை",
+        "generate_recommendations": "🌱 பரிந்துரைகளை உருவாக்கவும்", "recommendations_heading": "🌱 பரிந்துரைகள்", "save_details_first": "முதலில் பயிர் விவரங்களைச் சேமிக்கவும்.",
+        "generating_for": "**{crop}** பயிருக்கான பரிந்துரைகள் உருவாக்கப்படுகின்றன", "commodity": "பொருள்", "state_optional": "மாநிலம் (விருப்பம்)",
+        "district_optional": "மாவட்டம் (விருப்பம்)", "get_market": "💰 சந்தை தகவலைப் பெறுக", "fetching_market": "சந்தை தகவல் பெறப்படுகிறது...",
+        "market_found": "சந்தை பதிவுகள் கிடைத்தன.", "no_market": "தேர்ந்தெடுக்கப்பட்ட தேடலுக்கு சந்தை பதிவுகள் எதுவும் கிடைக்கவில்லை.",
+        "footer": "AI உதவியுடன் செயல்படும் வேளாண்மை தளம்", "unable_weather": "வானிலை ஏற்ற முடியவில்லை: {error}",
+        "prediction_failed": "நோய் கணிப்பு தோல்வியடைந்தது: {error}", "unable_market": "சந்தை தகவலைப் பெற முடியவில்லை: {error}",
+        "language": "🌐 மொழி", "select_language": "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்", "current_crop_info": "பயிர்: **{crop}** | மண்: **{soil}** | வளர்ச்சி: **{growth}** | பாசனம்: **{irrigation}**",
+        "crop_image_help": "ஆதரிக்கப்படும் வடிவங்கள்: JPG, JPEG, PNG, WEBP", "language_note": "மொழி மாற்றம் இடைமுகத்தில் உடனடியாக அமலாகும்.",
+    },
+}
+
+# Hindi/Telugu/Kannada/Malayalam are initialized with common UI fallbacks.
+# Add translations incrementally without changing application logic.
+COMMON_REGIONAL = {
+    "hi": {
+        "navigation":"नेविगेशन","language":"🌐 भाषा","select_language":"अपनी भाषा चुनें","dashboard":"🏠 डैशबोर्ड","crop_setup":"🌾 फसल सेटअप",
+        "disease_scanner":"🦠 रोग स्कैनर","weather":"🌦️ मौसम","smart_irrigation":"💧 स्मार्ट सिंचाई","recommendations":"🤖 फसल सुझाव","market":"💰 बाजार जानकारी",
+        "smart_agriculture":"स्मार्ट कृषि सहायक","crop":"फसल","soil":"मिट्टी","rain_risk":"बारिश का जोखिम","growth_stage":"विकास अवस्था","not_set":"सेट नहीं है",
+        "save_crop":"💾 फसल विवरण सहेजें","crop_saved":"फसल विवरण सफलतापूर्वक सहेजा गया!","farm_area":"खेत का क्षेत्रफल","soil_type":"मिट्टी का प्रकार",
+        "growth_stage_label":"विकास अवस्था","irrigation_method":"सिंचाई विधि","upload_crop":"📷 फसल की तस्वीर अपलोड करें","scan":"🤖 रोग स्कैन करें",
+        "temperature":"🌡️ तापमान","humidity":"💧 आर्द्रता","rain":"🌧️ बारिश","wind":"🌬️ हवा","forecast":"📅 3-दिन का पूर्वानुमान",
+        "get_weather":"🌦️ मौसम प्राप्त करें","rain_probability":"बारिश की संभावना (%)","recommendation":"सिफारिश","advice":"📋 सलाह",
+        "commodity":"वस्तु","state_optional":"राज्य (वैकल्पिक)","district_optional":"जिला (वैकल्पिक)","get_market":"💰 बाजार जानकारी प्राप्त करें",
+    },
+    "te": {
+        "navigation":"నావిగేషన్","language":"🌐 భాష","select_language":"మీ భాషను ఎంచుకోండి","dashboard":"🏠 డ్యాష్‌బోర్డ్","crop_setup":"🌾 పంట సెటప్",
+        "disease_scanner":"🦠 వ్యాధి స్కానర్","weather":"🌦️ వాతావరణం","smart_irrigation":"💧 స్మార్ట్ నీటిపారుదల","recommendations":"🤖 పంట సిఫార్సులు","market":"💰 మార్కెట్ సమాచారం",
+        "smart_agriculture":"స్మార్ట్ వ్యవసాయ సహాయకుడు","crop":"పంట","soil":"నేల","rain_risk":"వర్షపు ప్రమాదం","growth_stage":"పెరుగుదల దశ","not_set":"సెట్ చేయలేదు",
+        "save_crop":"💾 పంట వివరాలను సేవ్ చేయండి","crop_saved":"పంట వివరాలు విజయవంతంగా సేవ్ చేయబడ్డాయి!","farm_area":"వ్యవసాయ విస్తీర్ణం","soil_type":"నేల రకం",
+        "growth_stage_label":"పెరుగుదల దశ","irrigation_method":"నీటిపారుదల పద్ధతి","upload_crop":"📷 పంట చిత్రాన్ని అప్‌లోడ్ చేయండి","scan":"🤖 వ్యాధి స్కాన్ చేయండి",
+        "temperature":"🌡️ ఉష్ణోగ్రత","humidity":"💧 తేమ","rain":"🌧️ వర్షం","wind":"🌬️ గాలి","forecast":"📅 3-రోజుల అంచనా","get_weather":"🌦️ వాతావరణం పొందండి",
+        "rain_probability":"వర్షం అవకాశం (%)","recommendation":"సిఫార్సు","advice":"📋 సలహా","commodity":"వస్తువు","state_optional":"రాష్ట్రం (ఐచ్ఛికం)","district_optional":"జిల్లా (ఐచ్ఛికం)","get_market":"💰 మార్కెట్ సమాచారం పొందండి",
+    },
+    "kn": {
+        "navigation":"ನ್ಯಾವಿಗೇಶನ್","language":"🌐 ಭಾಷೆ","select_language":"ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ","dashboard":"🏠 ಡ್ಯಾಶ್‌ಬೋರ್ಡ್","crop_setup":"🌾 ಬೆಳೆ ಸೆಟಪ್",
+        "disease_scanner":"🦠 ರೋಗ ಸ್ಕ್ಯಾನರ್","weather":"🌦️ ಹವಾಮಾನ","smart_irrigation":"💧 ಸ್ಮಾರ್ಟ್ ನೀರಾವರಿ","recommendations":"🤖 ಬೆಳೆ ಶಿಫಾರಸುಗಳು","market":"💰 ಮಾರುಕಟ್ಟೆ ಮಾಹಿತಿ",
+        "smart_agriculture":"ಸ್ಮಾರ್ಟ್ ಕೃಷಿ ಸಹಾಯಕ","crop":"ಬೆಳೆ","soil":"ಮಣ್ಣು","rain_risk":"ಮಳೆಯ ಅಪಾಯ","growth_stage":"ಬೆಳವಣಿಗೆಯ ಹಂತ","not_set":"ಹೊಂದಿಸಲಾಗಿಲ್ಲ",
+        "save_crop":"💾 ಬೆಳೆ ವಿವರಗಳನ್ನು ಉಳಿಸಿ","crop_saved":"ಬೆಳೆ ವಿವರಗಳನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಉಳಿಸಲಾಗಿದೆ!","farm_area":"ಕೃಷಿ ಪ್ರದೇಶ","soil_type":"ಮಣ್ಣಿನ ವಿಧ",
+        "growth_stage_label":"ಬೆಳವಣಿಗೆಯ ಹಂತ","irrigation_method":"ನೀರಾವರಿ ವಿಧಾನ","upload_crop":"📷 ಬೆಳೆ ಚಿತ್ರವನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಿ","scan":"🤖 ರೋಗ ಸ್ಕ್ಯಾನ್ ಮಾಡಿ",
+        "temperature":"🌡️ ತಾಪಮಾನ","humidity":"💧 ಆರ್ದ್ರತೆ","rain":"🌧️ ಮಳೆ","wind":"🌬️ ಗಾಳಿ","forecast":"📅 3 ದಿನಗಳ ಮುನ್ಸೂಚನೆ","get_weather":"🌦️ ಹವಾಮಾನ ಪಡೆಯಿರಿ",
+        "rain_probability":"ಮಳೆಯ ಸಾಧ್ಯತೆ (%)","recommendation":"ಶಿಫಾರಸು","advice":"📋 ಸಲಹೆ","commodity":"ಸರಕು","state_optional":"ರಾಜ್ಯ (ಐಚ್ಛಿಕ)","district_optional":"ಜಿಲ್ಲೆ (ಐಚ್ಛಿಕ)","get_market":"💰 ಮಾರುಕಟ್ಟೆ ಮಾಹಿತಿ ಪಡೆಯಿರಿ",
+    },
+    "ml": {
+        "navigation":"നാവിഗേഷൻ","language":"🌐 ഭാഷ","select_language":"നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക","dashboard":"🏠 ഡാഷ്ബോർഡ്","crop_setup":"🌾 വിള ക്രമീകരണം",
+        "disease_scanner":"🦠 രോഗ സ്കാനർ","weather":"🌦️ കാലാവസ്ഥ","smart_irrigation":"💧 സ്മാർട്ട് ജലസേചനം","recommendations":"🤖 വിള ശുപാർശകൾ","market":"💰 വിപണി വിവരം",
+        "smart_agriculture":"സ്മാർട്ട് കാർഷിക സഹായി","crop":"വിള","soil":"മണ്ണ്","rain_risk":"മഴ അപകടസാധ്യത","growth_stage":"വളർച്ചാ ഘട്ടം","not_set":"സജ്ജമാക്കിയിട്ടില്ല",
+        "save_crop":"💾 വിള വിവരങ്ങൾ സംരക്ഷിക്കുക","crop_saved":"വിള വിവരങ്ങൾ വിജയകരമായി സംരക്ഷിച്ചു!","farm_area":"കൃഷിസ്ഥല വിസ്തീർണ്ണം","soil_type":"മണ്ണിന്റെ തരം",
+        "growth_stage_label":"വളർച്ചാ ഘട്ടം","irrigation_method":"ജലസേചന രീതി","upload_crop":"📷 വിളയുടെ ചിത്രം അപ്‌ലോഡ് ചെയ്യുക","scan":"🤖 രോഗം സ്കാൻ ചെയ്യുക",
+        "temperature":"🌡️ താപനില","humidity":"💧 ഈർപ്പം","rain":"🌧️ മഴ","wind":"🌬️ കാറ്റ്","forecast":"📅 3 ദിവസത്തെ പ്രവചനം","get_weather":"🌦️ കാലാവസ്ഥ നേടുക",
+        "rain_probability":"മഴയ്ക്കുള്ള സാധ്യത (%)","recommendation":"ശുപാർശ","advice":"📋 ഉപദേശം","commodity":"ചരക്ക്","state_optional":"സംസ്ഥാനം (ഓപ്ഷണൽ)","district_optional":"ജില്ല (ഓപ്ഷണൽ)","get_market":"💰 വിപണി വിവരം നേടുക",
+    },
+}
+
+for _code, _values in COMMON_REGIONAL.items():
+    TRANSLATIONS[_code] = {**TRANSLATIONS["en"], **_values}
+
+def t(key, **kwargs):
+    """Return the selected-language UI string, falling back safely to English."""
+    value = TRANSLATIONS.get(st.session_state.get("language", "en"), TRANSLATIONS["en"]).get(
+        key, TRANSLATIONS["en"].get(key, key)
+    )
+    return value.format(**kwargs) if kwargs else value
+
+def localized_value(value):
+    """Translate common selectable values while retaining English internal keys."""
+    maps = {
+        "ta": {
+            "Tomato":"தக்காளி","Rice":"நெல்","Wheat":"கோதுமை","Maize":"மக்காச்சோளம்","Potato":"உருளைக்கிழங்கு",
+            "Onion":"வெங்காயம்","Cotton":"பருத்தி","Sugarcane":"கரும்பு","Groundnut":"நிலக்கடலை","Banana":"வாழை",
+            "Sandy":"மணற்பாங்கான","Clay":"களிமண்","Loamy":"வண்டல் மண்","Seedling":"நாற்று நிலை","Vegetative":"வளர்ச்சி நிலை",
+            "Flowering":"பூக்கும் நிலை","Fruiting":"காய்க்கும் நிலை","Harvest":"அறுவடை","Drip":"சொட்டு நீர்ப்பாசனம்",
+            "Sprinkler":"தெளிப்பு நீர்ப்பாசனம்","Flood":"வெள்ளப் பாசனம்","High":"அதிகம்","Moderate":"மிதமான","Low":"குறைவு"
+        }
+    }
+    return maps.get(st.session_state.get("language","en"), {}).get(value, value)
+
+
+
+
+# ============================================================
 # PATHS
 # ============================================================
 
@@ -1020,6 +1232,9 @@ if "weather_data" not in st.session_state:
 if "disease_result" not in st.session_state:
     st.session_state.disease_result = None
 
+if "language" not in st.session_state:
+    st.session_state.language = "en"
+
 
 # ============================================================
 # SIDEBAR
@@ -1027,23 +1242,30 @@ if "disease_result" not in st.session_state:
 
 st.sidebar.title("🌱 AgriBridge AI")
 
-st.sidebar.markdown(
-    "AI-powered agriculture assistant"
+language_name = st.sidebar.selectbox(
+    t("language"),
+    list(LANGUAGES.keys()),
+    index=list(LANGUAGES.values()).index(st.session_state.language),
+    key="language_selector"
 )
+st.session_state.language = LANGUAGES[language_name]
 
+st.sidebar.caption(t("language_note"))
+
+st.sidebar.markdown(t("app_subtitle"))
+
+PAGE_KEYS = [
+    ("dashboard", "🏠 Dashboard"),
+    ("crop_setup", "🌾 Crop Setup"),
+    ("disease_scanner", "🦠 Disease Scanner"),
+    ("weather", "🌦️ Weather"),
+    ("smart_irrigation", "💧 Smart Irrigation"),
+    ("recommendations", "🤖 Crop Recommendations"),
+    ("market", "💰 Market Information"),
+]
 page = st.sidebar.radio(
-
-    "Navigation",
-
-    [
-        "🏠 Dashboard",
-        "🌾 Crop Setup",
-        "🦠 Disease Scanner",
-        "🌦️ Weather",
-        "💧 Smart Irrigation",
-        "🤖 Crop Recommendations",
-        "💰 Market Information"
-    ]
+    t("navigation"),
+    [t(key) for key, _ in PAGE_KEYS]
 )
 
 
@@ -1051,17 +1273,13 @@ page = st.sidebar.radio(
 # DASHBOARD
 # ============================================================
 
-if page == "🏠 Dashboard":
+if page == t("dashboard"):
 
     st.title("🌱 AgriBridge AI")
 
-    st.subheader(
-        "Smart Agriculture Assistant"
-    )
+    st.subheader(t("smart_agriculture"))
 
-    st.markdown(
-        "Use AI-assisted crop disease detection, weather information, irrigation guidance and crop recommendations."
-    )
+    st.markdown(t("dashboard_desc"))
 
     st.divider()
 
@@ -1072,7 +1290,7 @@ if page == "🏠 Dashboard":
         st.metric(
             "🌾 Crop",
             st.session_state.crop
-            or "Not set"
+            or t("not_set")
         )
 
     with col2:
@@ -1098,28 +1316,26 @@ if page == "🏠 Dashboard":
 
     st.divider()
 
-    st.subheader(
-        "🚀 AgriBridge Features"
-    )
+    st.subheader(t("features"))
 
     c1, c2, c3 = st.columns(3)
 
     with c1:
 
         st.info(
-            "🦠 **Disease Scanner**\n\nUpload a crop leaf image and use your trained AI model to identify the predicted class."
+            t("disease_feature")
         )
 
     with c2:
 
         st.info(
-            "🌦️ **Weather**\n\nCheck current weather, rainfall probability and farming guidance."
+            t("weather_feature")
         )
 
     with c3:
 
         st.info(
-            "💧 **Smart Irrigation**\n\nGenerate irrigation guidance using soil, crop stage and rainfall probability."
+            t("irrigation_feature")
         )
 
 
@@ -1127,12 +1343,12 @@ if page == "🏠 Dashboard":
 # CROP SETUP
 # ============================================================
 
-elif page == "🌾 Crop Setup":
+elif page == t("crop_setup"):
 
     st.title("🌾 Crop Setup")
 
     st.write(
-        "Enter your farm and crop information."
+        t("enter_farm_info")
     )
 
     crop_options = [
@@ -1156,7 +1372,7 @@ elif page == "🌾 Crop Setup":
     )
 
     crop = st.selectbox(
-        "Crop",
+        t("crop"),
         crop_options,
         index=crop_options.index(
             current_crop
@@ -1164,7 +1380,7 @@ elif page == "🌾 Crop Setup":
     )
 
     area = st.number_input(
-        "Farm Area",
+        t("farm_area"),
         min_value=0.0,
         step=0.1,
         value=float(
@@ -1173,7 +1389,7 @@ elif page == "🌾 Crop Setup":
     )
 
     soil = st.selectbox(
-        "Soil Type",
+        t("soil_type"),
         [
             "Sandy",
             "Clay",
@@ -1189,7 +1405,7 @@ elif page == "🌾 Crop Setup":
     )
 
     growth_stage = st.selectbox(
-        "Growth Stage",
+        t("growth_stage_label"),
         [
             "Seedling",
             "Vegetative",
@@ -1209,7 +1425,7 @@ elif page == "🌾 Crop Setup":
     )
 
     irrigation = st.selectbox(
-        "Irrigation Method",
+        t("irrigation_method"),
         [
             "Drip",
             "Sprinkler",
@@ -1225,7 +1441,7 @@ elif page == "🌾 Crop Setup":
     )
 
     if st.button(
-        "💾 Save Crop Details",
+        t("save_crop"),
         type="primary"
     ):
 
@@ -1236,7 +1452,7 @@ elif page == "🌾 Crop Setup":
         st.session_state.irrigation = irrigation
 
         st.success(
-            "Crop details saved successfully!"
+            t("crop_saved")
         )
 
 
@@ -1244,7 +1460,7 @@ elif page == "🌾 Crop Setup":
 # DISEASE SCANNER
 # ============================================================
 
-elif page == "🦠 Disease Scanner":
+elif page == t("disease_scanner"):
 
     st.title("🦠 AI Crop Disease Scanner")
 
@@ -1255,7 +1471,7 @@ elif page == "🦠 Disease Scanner":
     if model_error:
 
         st.error(
-            "Disease model could not be loaded."
+            t("model_failed")
         )
 
         st.code(
@@ -1271,12 +1487,12 @@ elif page == "🦠 Disease Scanner":
     else:
 
         st.success(
-            f"AI model loaded successfully — {len(class_names)} classes."
+            t("model_loaded", n=len(class_names))
         )
 
         uploaded_file = st.file_uploader(
 
-            "📷 Upload crop image",
+            t("upload_crop"),
 
             type=[
                 "jpg",
@@ -1294,17 +1510,17 @@ elif page == "🦠 Disease Scanner":
 
             st.image(
                 image,
-                caption="Uploaded Crop Image",
+                caption=t("uploaded_crop"),
                 use_container_width=True
             )
 
             if st.button(
-                "🤖 Scan for Disease",
+                t("scan"),
                 type="primary"
             ):
 
                 with st.spinner(
-                    "Analyzing crop image..."
+                    t("analyzing")
                 ):
 
                     try:
@@ -1320,7 +1536,7 @@ elif page == "🦠 Disease Scanner":
                         st.session_state.disease_result = None
 
                         st.error(
-                            f"Disease prediction failed: {error}"
+                            t("prediction_failed", error=error)
                         )
 
         result = (
@@ -1340,7 +1556,7 @@ elif page == "🦠 Disease Scanner":
             st.divider()
 
             st.subheader(
-                "🤖 AI Analysis"
+                t("ai_analysis")
             )
 
             result_col1, result_col2 = (
@@ -1350,14 +1566,14 @@ elif page == "🦠 Disease Scanner":
             with result_col1:
 
                 st.metric(
-                    "Prediction",
+                    t("prediction"),
                     predicted_class
                 )
 
             with result_col2:
 
                 st.metric(
-                    "Confidence",
+                    t("confidence"),
                     f"{confidence * 100:.2f}%"
                 )
 
@@ -1366,13 +1582,13 @@ elif page == "🦠 Disease Scanner":
             ):
 
                 st.success(
-                    "🌱 The model classified this image as healthy."
+                    t("healthy")
                 )
 
             else:
 
                 st.warning(
-                    "⚠️ The model detected a disease-related class."
+                    t("disease_detected")
                 )
 
             # ------------------------------------------------
@@ -1384,7 +1600,7 @@ elif page == "🦠 Disease Scanner":
             )
 
             st.subheader(
-                "🩺 Suggested Care"
+                t("care")
             )
 
             for item in care_data["care"]:
@@ -1394,7 +1610,7 @@ elif page == "🦠 Disease Scanner":
                 )
 
             st.subheader(
-                "🛡️ Prevention"
+                t("prevention")
             )
 
             for item in care_data["prevention"]:
@@ -1408,7 +1624,7 @@ elif page == "🦠 Disease Scanner":
             # ------------------------------------------------
 
             st.subheader(
-                "📊 Top Predictions"
+                t("top_predictions")
             )
 
             for item in result[
@@ -1441,12 +1657,12 @@ elif page == "🦠 Disease Scanner":
 # WEATHER
 # ============================================================
 
-elif page == "🌦️ Weather":
+elif page == t("weather"):
 
     st.title("🌦️ Live Weather")
 
     st.write(
-        "Enter the coordinates of your farm."
+        t("coordinates")
     )
 
     col1, col2 = st.columns(2)
@@ -1454,7 +1670,7 @@ elif page == "🌦️ Weather":
     with col1:
 
         latitude = st.number_input(
-            "Latitude",
+            t("latitude"),
             value=11.0168,
             format="%.6f"
         )
@@ -1462,18 +1678,18 @@ elif page == "🌦️ Weather":
     with col2:
 
         longitude = st.number_input(
-            "Longitude",
+            t("longitude"),
             value=76.9558,
             format="%.6f"
         )
 
     if st.button(
-        "🌦️ Get Weather",
+        t("get_weather"),
         type="primary"
     ):
 
         with st.spinner(
-            "Loading live weather..."
+            t("loading_weather")
         ):
 
             try:
@@ -1496,7 +1712,7 @@ elif page == "🌦️ Weather":
             except Exception as error:
 
                 st.error(
-                    f"Unable to load weather: {error}"
+                    t("unable_weather", error=error)
                 )
 
     weather_result = (
@@ -1530,51 +1746,51 @@ elif page == "🌦️ Weather":
         with c1:
 
             st.metric(
-                "🌡️ Temperature",
+                t("temperature"),
                 f"{current.get('temperature_2m', '--')} °C"
             )
 
         with c2:
 
             st.metric(
-                "💧 Humidity",
+                t("humidity"),
                 f"{current.get('relative_humidity_2m', '--')} %"
             )
 
         with c3:
 
             st.metric(
-                "🌧️ Rain",
+                t("rain"),
                 f"{current.get('rain', 0)} mm"
             )
 
         with c4:
 
             st.metric(
-                "🌬️ Wind",
+                t("wind"),
                 f"{current.get('wind_speed_10m', '--')} km/h"
             )
 
         st.subheader(
-            "🌧️ Rain Risk"
+            t("rain_risk_heading")
         )
 
         if rain_risk == "High":
 
             st.error(
-                f"🔴 High Rain Risk — {rain_probability}% maximum forecast probability"
+                t("high_rain", p=rain_probability)
             )
 
         elif rain_risk == "Moderate":
 
             st.warning(
-                f"🟠 Moderate Rain Risk — {rain_probability}% maximum forecast probability"
+                t("moderate_rain", p=rain_probability)
             )
 
         else:
 
             st.success(
-                f"🟢 Low Rain Risk — {rain_probability}% maximum forecast probability"
+                t("low_rain", p=rain_probability)
             )
 
         st.session_state.rain_risk = (
@@ -1582,7 +1798,7 @@ elif page == "🌦️ Weather":
         )
 
         st.subheader(
-            "🌱 Farmer Weather Advice"
+            t("weather_advice")
         )
 
         for advice in weather_result[
@@ -1596,7 +1812,7 @@ elif page == "🌦️ Weather":
         # 3-day forecast
 
         st.subheader(
-            "📅 3-Day Forecast"
+            t("forecast")
         )
 
         forecast_rows = []
@@ -1652,12 +1868,12 @@ elif page == "🌦️ Weather":
 # SMART IRRIGATION
 # ============================================================
 
-elif page == "💧 Smart Irrigation":
+elif page == t("smart_irrigation"):
 
     st.title("💧 Smart Irrigation")
 
     st.write(
-        "Generate irrigation guidance using your crop information and rainfall probability."
+        t("irrigation_desc")
     )
 
     crop = st.session_state.crop
@@ -1665,21 +1881,24 @@ elif page == "💧 Smart Irrigation":
     if not crop:
 
         st.warning(
-            "Please configure your crop first."
+            t("configure_crop")
         )
 
     else:
 
         st.info(
-            f"Crop: **{crop}** | "
-            f"Soil: **{st.session_state.soil}** | "
-            f"Growth: **{st.session_state.growth_stage}** | "
-            f"Irrigation: **{st.session_state.irrigation}**"
+            t(
+                "current_crop_info",
+                crop=localized_value(crop),
+                soil=localized_value(st.session_state.soil),
+                growth=localized_value(st.session_state.growth_stage),
+                irrigation=localized_value(st.session_state.irrigation),
+            )
         )
 
         rain_probability = st.number_input(
 
-            "Rain Probability (%)",
+            t("rain_probability"),
 
             min_value=0.0,
 
@@ -1691,7 +1910,7 @@ elif page == "💧 Smart Irrigation":
         )
 
         if st.button(
-            "💧 Generate Irrigation Advice",
+            t("generate_irrigation"),
             type="primary"
         ):
 
@@ -1711,7 +1930,7 @@ elif page == "💧 Smart Irrigation":
             )
 
             st.subheader(
-                "Recommendation"
+                t("recommendation")
             )
 
             st.success(
@@ -1719,7 +1938,7 @@ elif page == "💧 Smart Irrigation":
             )
 
             st.subheader(
-                "📋 Advice"
+                t("advice")
             )
 
             for item in advice:
@@ -1733,7 +1952,7 @@ elif page == "💧 Smart Irrigation":
 # CROP RECOMMENDATIONS
 # ============================================================
 
-elif page == "🤖 Crop Recommendations":
+elif page == t("recommendations"):
 
     st.title(
         "🤖 Smart Crop Recommendations"
@@ -1742,7 +1961,7 @@ elif page == "🤖 Crop Recommendations":
     if not st.session_state.crop:
 
         st.warning(
-            "Please save crop details first."
+            t("save_details_first")
         )
 
     else:
@@ -1753,7 +1972,7 @@ elif page == "🤖 Crop Recommendations":
         )
 
         if st.button(
-            "🌱 Generate Recommendations",
+            t("generate_recommendations"),
             type="primary"
         ):
 
@@ -1773,7 +1992,7 @@ elif page == "🤖 Crop Recommendations":
             )
 
             st.subheader(
-                "🌱 Recommendations"
+                t("recommendations_heading")
             )
 
             for item in recommendations:
@@ -1787,7 +2006,7 @@ elif page == "🤖 Crop Recommendations":
 # MARKET INFORMATION
 # ============================================================
 
-elif page == "💰 Market Information":
+elif page == t("market"):
 
     st.title(
         "💰 Market Information"
@@ -1807,27 +2026,27 @@ elif page == "💰 Market Information":
     ]
 
     commodity = st.selectbox(
-        "Commodity",
+        t("commodity"),
         crop_options
     )
 
     state = st.text_input(
-        "State (optional)",
+        t("state_optional"),
         ""
     )
 
     district = st.text_input(
-        "District (optional)",
+        t("district_optional"),
         ""
     )
 
     if st.button(
-        "💰 Get Market Information",
+        t("get_market"),
         type="primary"
     ):
 
         with st.spinner(
-            "Fetching market information..."
+            t("fetching_market")
         ):
 
             try:
@@ -1848,7 +2067,7 @@ elif page == "💰 Market Information":
                 ]:
 
                     st.success(
-                        "Market records found."
+                        t("market_found")
                     )
 
                     st.dataframe(
@@ -1861,13 +2080,13 @@ elif page == "💰 Market Information":
                 else:
 
                     st.info(
-                        "No market records were found for the selected search."
+                        t("no_market")
                     )
 
             except Exception as error:
 
                 st.error(
-                    f"Unable to retrieve market information: {error}"
+                    t("unable_market", error=error)
                 )
 
 
@@ -1877,10 +2096,8 @@ elif page == "💰 Market Information":
 
 st.sidebar.divider()
 
-st.sidebar.caption(
-    "🌱 AgriBridge AI"
-)
+st.sidebar.caption("🌱 AgriBridge AI")
 
 st.sidebar.caption(
-    "AI-assisted agriculture platform"
+    t("footer")
 )
